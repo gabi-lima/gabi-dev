@@ -15,7 +15,7 @@ import {
 import ReactLogo from "../src/assets/reactbw.png";
 import JavaScriptLogo from "../src/assets/javascriptbw.png";
 import JavaLogo from "../src/assets/javabw.png";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import { ParallaxLayer, Parallax } from "@react-spring/parallax";
 
@@ -65,10 +65,26 @@ const Card = (props) => {
 
 function App() {
   const [isMenuOpen, setMenuOpen] = useState(false);
+
   const menuAnimation = useSpring({
     opacity: isMenuOpen ? 1 : 0,
     pointerEvents: isMenuOpen ? "auto" : "none",
   });
+
+  useEffect(() => {
+    // Função para fechar o menu
+    const closeMenu = () => {
+      setMenuOpen(false);
+    };
+
+    // Adicione um ouvinte de evento para monitorar as alterações de scroll
+    window.addEventListener("scroll", closeMenu);
+
+    // Retorna uma função de limpeza para remover o ouvinte quando o componente for desmontado
+    return () => {
+      window.removeEventListener("scroll", closeMenu);
+    };
+  }, []);
   return (
     <>
       <Parallax pages={2} className="bg-black">
@@ -84,7 +100,8 @@ function App() {
                   className="absolute left-0 ml-10 text-white text-sm  transition ease-in-out active:text-black duration-300 cursor-pointer"
                 />
                 <animated.div
-                  className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-90 backdrop-blur-3xl flex items-center justify-center"
+                  className="	fixed top-0 left-0 w-full h-full bg-black bg-opacity-90 backdrop-blur-3xl flex items-center justify-center"
+                  id="menu-open"
                   style={menuAnimation}
                 >
                   <ul className="text-white text-3xl space-y-4">
@@ -154,7 +171,7 @@ function App() {
                 link="https://www.zendit.ng/"
                 icon={faGlobe}
                 title="Zendit Website"
-                subtitle="Journal App"
+                subtitle="Courier App"
                 content="
                 Website in development for Zennit Technologies, during my volunteer.
                 "
