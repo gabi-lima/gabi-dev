@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./index.css";
+import Video from "../src/assets/space.mp4";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+
+const BackgroundVideo = () => {
+  return (
+    <video
+      src={Video}
+      autoPlay
+      muted
+      loop
+      className="w-full h-full absolute top-0 -z-20 object-cover"
+    ></video>
+  );
+};
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      {/* Header */}
+      <div className="fixed w-full">
+        {" "}
+        <div className="bg-midnightpurple/60 flex justify-center items-center h-8">
+          <FontAwesomeIcon
+            icon={faBars}
+            className="absolute left-0 ml-10 text-white text-sm  transition ease-in-out active:text-black duration-300 cursor-pointer"
+          />
+          <h1 className="z-10 text-white font-thin cursor-pointer">
+            {" "}
+            Gabi Developer
+          </h1>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+
+      {/* BackgroundVideo and Text */}
+      <BackgroundVideo />
+      <div className="flex justify-center items-center h-80 flex-col">
+        <h1 className="text-white text-4xl font-extrabold transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 cursor-default	">
+          The Right Dev for You.
+        </h1>
+        <h2 className="text-gray-200 cursor-default text-2xl	"> Front-End</h2>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div className="bg-gradient-to-t from-black w-full h-full p-44 absolute bottom-0 -z-10"></div>
+      <div className=" w-full text-white flex justify-center mt-80">
+        <h1 className="font-bold "> HTML, CSS, JS </h1>
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
