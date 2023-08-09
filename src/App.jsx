@@ -10,31 +10,29 @@ import {
   faCar,
   faSitemap,
   faGlobe,
+  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import ReactLogo from "../src/assets/reactbw.png";
 import JavaScriptLogo from "../src/assets/javascriptbw.png";
 import JavaLogo from "../src/assets/javabw.png";
-import { ParallaxLayer, Parallax } from "@react-spring/parallax";
 import React, { useState } from "react";
+import { useSpring, animated } from "@react-spring/web";
+import { ParallaxLayer, Parallax } from "@react-spring/parallax";
 
-const BackgroundVideo = (mouseX) => {
+const BackgroundVideo = () => {
   return (
-    
-      <video
-        src={Video}
-        autoPlay
-        muted
-        loop
-        className="w-full h-full absolute top-0 -z-20 object-cover"
-        style={{ transform: `translateX(${xOffset}px)` }}
-      ></video>
-    </div>
+    <video
+      src={Video}
+      autoPlay
+      muted
+      loop
+      className="w-full h-full absolute top-0 -z-20 object-cover"
+    ></video>
   );
 };
 const BackgroundVideo2 = () => {
   return (
     <video
-      id="parallax"
       src={Video2}
       autoPlay
       muted
@@ -53,41 +51,72 @@ const Card = (props) => {
       target="_blank"
       className="text-white w-60 h-30 px-3 flex justify-center items-center flex-wrap mt-10 border-4 rounded-sm sm:ml-10"
     >
-      <div className="flex justify-center items-center  space-x-1  p-1">
+      <div className="flex justify-center items-center p-1 space-x-1">
         {icon ? (
-          <FontAwesomeIcon
-            icon={icon}
-            className="font-bold text-2xl antialiased"
-          />
+          <FontAwesomeIcon icon={icon} className="font-bold text-2xl" />
         ) : null}
-        <h1 className="font-bold text-2xl antialiased">{title}</h1>
+        <h1 className="font-bold text-2xl">{title}</h1>
       </div>
-      {subtitle && (
-        <h2 className="font-semibold text-xl antialiased">{subtitle}</h2>
-      )}
-      <p className="text-center p-5 antialiased">{content}</p>
+      {subtitle && <h2 className="font-semibold text-xl">{subtitle}</h2>}
+      <p className="text-center p-5">{content}</p>
     </a>
   );
 };
 
 function App() {
+  const [isMenuOpen, setMenuOpen] = useState(false);
+  const menuAnimation = useSpring({
+    opacity: isMenuOpen ? 1 : 0,
+    pointerEvents: isMenuOpen ? "auto" : "none",
+  });
   return (
     <>
       <Parallax pages={2} className="bg-black">
         <ParallaxLayer offset={0} speed={0.8} className="h-screen">
           <div className="h-screen">
             {/* Header */}
-            <div className="fixed w-full h-screen">
+            <div className="fixed w-full h-screen z-20">
               {" "}
               <div className="bg-midnightpurple/60 flex justify-center items-center h-8">
                 <FontAwesomeIcon
+                  onClick={() => setMenuOpen(!isMenuOpen)}
                   icon={faBars}
                   className="absolute left-0 ml-10 text-white text-sm  transition ease-in-out active:text-black duration-300 cursor-pointer"
                 />
+                <animated.div
+                  className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-90 backdrop-blur-3xl flex items-center justify-center"
+                  style={menuAnimation}
+                >
+                  <ul className="text-white text-3xl space-y-4">
+                    <li>
+                      <a href="#home">Home</a>
+                    </li>
+                    <li>
+                      <a href="#about">About</a>
+                    </li>
+                    {/* Adicione mais itens do menu conforme necessário */}
+                  </ul>
+
+                  <div
+                    className="absolute top-4 right-4 cursor-pointer"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <FontAwesomeIcon
+                      icon={faTimes}
+                      size="2x"
+                      className="text-white"
+                    />
+                  </div>
+                </animated.div>
 
                 <h1 className="z-10 text-white font-thin cursor-pointer">
                   {" "}
-                  Gabi Developer
+                  <a
+                    href="https://www.linkedin.com/in/gabriel-lima-9710191b9/ "
+                    target="_blank"
+                  >
+                    Gabi Developer
+                  </a>
                 </h1>
               </div>
             </div>
@@ -120,10 +149,7 @@ function App() {
         <ParallaxLayer offset={1} speed={1}>
           <div className="h-screen bg-gradient-to-b from-black">
             <BackgroundVideo2 />
-            <div
-              className="w-full flex justify-center items-center flex-wrap "
-              id="card"
-            >
+            <div className="w-full flex justify-center items-center flex-wrap ">
               <Card
                 link="https://www.zendit.ng/"
                 icon={faGlobe}
