@@ -15,7 +15,7 @@ import {
 import ReactLogo from "../src/assets/reactbw.png";
 import JavaScriptLogo from "../src/assets/javascriptbw.png";
 import JavaLogo from "../src/assets/javabw.png";
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import { ParallaxLayer, Parallax } from "@react-spring/parallax";
 
@@ -70,28 +70,21 @@ function App() {
     opacity: isMenuOpen ? 1 : 0,
     pointerEvents: isMenuOpen ? "auto" : "none",
   });
+  const ref = useRef();
+  const handleClick = (page) => {
+    if (ref.current) {
+      ref.current.scrollTo(page);
+    }
+    setMenuOpen(false);
+  };
 
-  useEffect(() => {
-    // Função para fechar o menu
-    const closeMenu = () => {
-      setMenuOpen(false);
-    };
-
-    // Adicione um ouvinte de evento para monitorar as alterações de scroll
-    window.addEventListener("scroll", closeMenu);
-
-    // Retorna uma função de limpeza para remover o ouvinte quando o componente for desmontado
-    return () => {
-      window.removeEventListener("scroll", closeMenu);
-    };
-  }, []);
   return (
     <>
-      <Parallax pages={2} className="bg-black">
+      <Parallax ref={ref} pages={2} className="bg-black">
         <ParallaxLayer offset={0} speed={0.8} className="h-screen">
           <div className="h-screen">
             {/* Header */}
-            <div className="fixed w-full h-screen z-20">
+            <div className="fixed w-full z-20">
               {" "}
               <div className="bg-midnightpurple/60 flex justify-center items-center h-8">
                 <FontAwesomeIcon
@@ -104,9 +97,14 @@ function App() {
                   id="menu-open"
                   style={menuAnimation}
                 >
-                  <ul className="text-white text-3xl space-y-4">
+                  <ul className="text-center text-white text-3xl space-y-4">
                     <li>
-                      <a href="#home">Home</a>
+                      <a
+                        onClick={() => handleClick(1)}
+                        className="cursor-pointer"
+                      >
+                        Projects
+                      </a>
                     </li>
                     <li>
                       <a href="#about">About</a>
@@ -155,15 +153,15 @@ function App() {
                 <img src={JavaLogo} className="w-8 "></img>
               </div>
 
-              <div className="text-white flex flex-col justify-center items-center absolute bottom-1 w-full">
+              <div className="text-white flex flex-col justify-center items-center absolute bottom-1 w-full z-20">
                 <FontAwesomeIcon icon={faArrowUp} />
-                <h1> Projects </h1>
+                <h1 onClick={() => ref.current.scrollTo(1)}> Projects </h1>
               </div>
             </ParallaxLayer>
             <div className="bg-gradient-to-t from-black w-full h-full p-44 absolute bottom-0 -z-10 "></div>
           </div>
         </ParallaxLayer>
-        <ParallaxLayer offset={1} speed={1}>
+        <ParallaxLayer offset={1} speed={1} ref={ref}>
           <div className="h-screen bg-gradient-to-b from-black">
             <BackgroundVideo2 />
             <div className="w-full flex justify-center items-center flex-wrap ">
