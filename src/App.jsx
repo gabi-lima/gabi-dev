@@ -80,65 +80,64 @@ function App() {
 
   return (
     <>
+      <div className="fixed w-full z-20">
+        {" "}
+        <div className="bg-midnightpurple/60 flex justify-center items-center h-8">
+          <FontAwesomeIcon
+            onClick={() => setMenuOpen(!isMenuOpen)}
+            icon={faBars}
+            className="absolute left-0 ml-10 text-white text-sm  transition ease-in-out active:text-black duration-300 cursor-pointer"
+          />
+          <animated.div
+            className="	fixed top-0 left-0 w-full h-full bg-black bg-opacity-90 backdrop-blur-3xl flex items-center justify-center"
+            id="menu-open"
+            style={menuAnimation}
+          >
+            <ul className="text-center text-white text-3xl space-y-4">
+              <li>
+                <a
+                  onClick={() => handleClick(1)}
+                  className="cursor-pointer"
+                >
+                  Projects
+                </a>
+              </li>
+              <li>
+                <a
+                  onClick={() => handleClick(2)}
+                  className="cursor-pointer"
+                >
+                  About
+                </a>
+              </li>
+              {/* Adicione mais itens do menu conforme necessário */}
+            </ul>
+            <div
+              className="absolute top-4 right-4 cursor-pointer"
+              onClick={() => setMenuOpen(false)}
+            >
+              <FontAwesomeIcon
+                icon={faTimes}
+                size="2x"
+                className="text-white"
+              />
+            </div>
+          </animated.div>
+
+          <h1 className="z-10 text-white font-thin cursor-pointer">
+            {" "}
+            <a
+              href="https://www.linkedin.com/in/gabriel-lima-9710191b9/ "
+              target="_blank"
+            >
+              Gabi Developer
+            </a>
+          </h1>
+        </div>
+      </div>
       <Parallax ref={ref} pages={3} className="bg-blackbg">
         <ParallaxLayer offset={0} speed={0.8} className="h-screen">
           <div className="h-screen">
-            {/* Header */}
-            <div className="fixed w-full z-20">
-              {" "}
-              <div className="bg-midnightpurple/60 flex justify-center items-center h-8">
-                <FontAwesomeIcon
-                  onClick={() => setMenuOpen(!isMenuOpen)}
-                  icon={faBars}
-                  className="absolute left-0 ml-10 text-white text-sm  transition ease-in-out active:text-black duration-300 cursor-pointer"
-                />
-                <animated.div
-                  className="	fixed top-0 left-0 w-full h-full bg-black bg-opacity-90 backdrop-blur-3xl flex items-center justify-center"
-                  id="menu-open"
-                  style={menuAnimation}
-                >
-                  <ul className="text-center text-white text-3xl space-y-4">
-                    <li>
-                      <a
-                        onClick={() => handleClick(1)}
-                        className="cursor-pointer"
-                      >
-                        Projects
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        onClick={() => handleClick(2)}
-                        className="cursor-pointer"
-                      >
-                        About
-                      </a>
-                    </li>
-                    {/* Adicione mais itens do menu conforme necessário */}
-                  </ul>
-                  <div
-                    className="absolute top-4 right-4 cursor-pointer"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    <FontAwesomeIcon
-                      icon={faTimes}
-                      size="2x"
-                      className="text-white"
-                    />
-                  </div>
-                </animated.div>
-
-                <h1 className="z-10 text-white font-thin cursor-pointer">
-                  {" "}
-                  <a
-                    href="https://www.linkedin.com/in/gabriel-lima-9710191b9/ "
-                    target="_blank"
-                  >
-                    Gabi Developer
-                  </a>
-                </h1>
-              </div>
-            </div>
             {/* BackgroundVideo and Text */}
             <BackgroundVideo />
 
@@ -217,7 +216,7 @@ function App() {
             <div className="w-2/5 ml-10 mt-10">
               <hr className="z-0 bg-pink-900 h-1 transition ease-in-out blur hover:blur-md"></hr>
               <hr className=""></hr>
-              <h1 className="mt-5">
+              <h1 className="mt-5 text-xl">
                 {" "}
                 Hello! My name is Gabriel, I'm a Brazilian Front-end Developer
                 and passionate about technology. I have experience with HTML,
@@ -227,10 +226,10 @@ function App() {
               <hr className="mt-5"></hr>
               <hr className="z-0 bg-pink-900 h-1 blur transition ease-in-out hover:blur-md"></hr>
             </div>
-            <div className=" w-full sm:ml-20 mt-10 sm:w-2/5 h-4/5 sm:bg-darkbg rounded sm:shadow-[0px_0px_40px_5px_rgba(1,1,1,1.1)] sm:shadow-pink-600/30 flex flex-col  text-center ">
-              <h1 className="mt-10 "> You can find me at:</h1>
+            <div className=" w-full sm:ml-20 mt-10 sm:w-2/5 h-4/5 sm:bg-darkbg rounded sm:shadow-[0px_0px_40px_5px_rgba(1,1,1,1.1)] sm:shadow-pink-600/30 flex flex-col text-xl text-center justify-center">
+              <h1 className=""> You can find me at:</h1>
               <div className="">
-                <p className="cursor-pointer mt-10">
+                <p className="cursor-pointer mt-2">
                   <FontAwesomeIcon icon={faLinkedin} />
                   <a className="">
                     {" "}
