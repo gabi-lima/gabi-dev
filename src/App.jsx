@@ -160,7 +160,7 @@ function App() {
 
               <div
                 className="text-white flex flex-col justify-center items-center absolute bottom-1 w-full z-20"
-                onClick={() => ref.current.scrollTo(1)}
+                onClick={() => handleClick(1)}
               >
                 <FontAwesomeIcon icon={faArrowUp} />
                 <h1> Projects </h1>
@@ -206,7 +206,7 @@ function App() {
           </div>
           <div
             className="text-white flex flex-col justify-center items-center absolute bottom-1 w-full z-20"
-            onClick={() => ref.current.scrollTo(2)}
+            onClick={() => handleClick(2)}
           >
             <FontAwesomeIcon icon={faArrowUp} />
             <h1> About </h1>
@@ -255,14 +255,14 @@ function App() {
               </div>
             </div>
           </div>
+          <div
+            className="text-white flex flex-col justify-center items-center absolute bottom-1 w-full z-20 cursor-pointer"
+            onClick={() => handleClick(0)}
+          >
+            <FontAwesomeIcon icon={faArrowUp} />
+            <h1> Go Up </h1>
+          </div>
         </ParallaxLayer>
-        <div
-          className="text-white flex flex-col justify-center items-center absolute bottom-1 w-full z-20"
-          onClick={() => ref.current.scrollTo(0)}
-        >
-          <FontAwesomeIcon icon={faArrowUp} />
-          <h1> Go Up </h1>
-        </div>
       </Parallax>
     </>
   );
