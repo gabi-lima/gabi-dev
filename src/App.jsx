@@ -1,5 +1,5 @@
 import "./index.css";
-import Video from "../src/assets/space.mp4";
+import Video from "https://www.youtube.com/watch?v=cWuzJBboQyE";
 import Video2 from "../src/assets/paradise.mp4";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
